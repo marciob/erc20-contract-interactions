@@ -16,9 +16,22 @@ interface IERC20 {
 
     function transfer(address to, uint256 amount) external returns (bool);
 
+    function allowance(address owner, address spender)
+        external
+        view
+        returns (uint256);
+
     event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
 contract LetsConnect is Ownable {
     constructor() {}
+
+    function getBalanceThere(address _contractAddress, address _accountAddress)
+        external
+        view
+        returns (uint256)
+    {
+        return IERC20(_contractAddress).balanceOf(_accountAddress);
+    }
 }
